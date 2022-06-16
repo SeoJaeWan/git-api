@@ -1,12 +1,12 @@
-import { Octokit, App } from "https://cdn.skypack.dev/octokit";
 import { useCallback, useEffect, useState } from "react";
+import { Octokit } from "octokit";
+
+const ONER = "SeoJaeWan";
+const REPO = "git-api";
 
 const octokit = new Octokit({
   auth: process.env.AUTH,
 });
-
-const ONER = "SeoJaeWan";
-const REPO = "git-api";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -26,20 +26,20 @@ function Home() {
 
   useEffect(() => {
     getPRDataHandler();
-  }, []);
+  }, [getPRDataHandler]);
 
   return (
     <div className="Home">
       <h1>
         {ONER} {REPO}
       </h1>
-      {data?.map((info) => {
+      {data.map((info, idx) => {
         return (
-          <div>
+          <div key={idx}>
             <p>작성자 : {info.user.login}</p>
             <p>리뷰 : {info.body}</p>
             <p>리뷰 경로 : {info.path}</p>
-            <a href={info._links.html.href} target="_blank">
+            <a href={info._links.html.href} target="_blank" rel="noreferrer">
               바로가기
             </a>
             <hr />
