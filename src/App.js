@@ -28,17 +28,20 @@ function Home() {
     getPRDataHandler();
   }, []);
 
-  console.log(data);
-
   return (
     <div className="Home">
+      <h1>
+        {ONER} {REPO}
+      </h1>
       {data?.map((info) => {
         return (
           <div>
             <p>작성자 : {info.user.login}</p>
             <p>리뷰 : {info.body}</p>
             <p>리뷰 경로 : {info.path}</p>
-            <a href={info.url}>바로가기</a>
+            <a href={info._links.html.href} target="_blank">
+              바로가기
+            </a>
             <hr />
           </div>
         );
